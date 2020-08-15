@@ -69,3 +69,6 @@ with open(csvpath) as csvfile:
     print(f"Winner: {winner_name}")
     print("-------------------")
     
+output_path = os.path.join("Analysis","results.txt")
+
+analysis = open(output_path, "w")
