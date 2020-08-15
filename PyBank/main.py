@@ -10,18 +10,20 @@ with open(csvpath) as csvfile:
 
     monthcount = []
     pnl_list = []
+    pnl_change = []
     for row in csvreader:
         monthcount.append(row[0])
         pnl_list.append(int(row[1]))
-    
+        
+    for i in range(1,len(pnl_list)):
+        change = int(pnl_list[i] - pnl_list[i-1])
+        pnl_change.append(int(change))
+        
+
     total_months = len(monthcount)
     pnl_total = sum(pnl_list)
     
-
-    pnl_change = []
-    for i in range(len(pnl_list)):
-        change = int(pnl_list[i] - pnl_list[i-1])
-        pnl_change.append(int(change))
+    #print(sum(pnl_change)
     
     #print(f"Change {change}")
 
@@ -29,18 +31,18 @@ with open(csvpath) as csvfile:
 
     change_total = 0
     for i in range(len(pnl_change)):
-        change_total =+ int(pnl_change[i])
+        change_total = change_total + float(pnl_change[i])
     #print(change_total)
     greatest_increase = max(pnl_change)
     greatest_decrease = min(pnl_change)
     
     max_month_index = pnl_change.index(max(pnl_change))
-    max_month = monthcount[max_month_index]
+    max_month = monthcount[max_month_index+1]
 
     min_month_index = pnl_change.index(min(pnl_change))
-    min_month = monthcount[min_month_index]
+    min_month = monthcount[min_month_index+1]
 
-    pnl_average = round(change_total / len(pnl_change))
+    pnl_average = round(change_total / len(pnl_change),2)
 
     print("Financial Analysis")
     print("---------------------")
