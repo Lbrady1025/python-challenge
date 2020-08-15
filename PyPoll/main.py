@@ -71,4 +71,12 @@ with open(csvpath) as csvfile:
     
 output_path = os.path.join("Analysis","results.txt")
 
-analysis = open(output_path, "w")
+results_txt = open(output_path, "w")
+
+results_txt.write("Election Results\n")
+results_txt.write("-------------------\n")
+results_txt.write(f"Total Votes: {total_votes}\n")
+results_txt.write(f"-------------------\n")
+results_txt.write(f"{candidate1}: {candidate1_pct} {len(candidate1_votes)}\n")
+results_txt.write(f"{candidate2}: {candidate2_pct} {len(candidate2_votes)}\n")
+
