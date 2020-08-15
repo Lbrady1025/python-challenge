@@ -54,7 +54,8 @@ with open(csvpath) as csvfile:
         candidate4_pct:candidate4}
 
     winner = max(results)
-    print(winner)
+    winner_name = results.get(max(results),None)
+    print(winner_name)
 
     print(f"Election Results")
     print("-------------------")
