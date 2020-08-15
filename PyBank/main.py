@@ -21,9 +21,11 @@ with open(csvpath) as csvfile:
     pnl_change = []
     for i in range(len(pnl_list)):
         change = int(pnl_list[i] - pnl_list[i-1])
-        pnl_change.append(change)
+        pnl_change.append(int(change))
     
     #print(f"Change {change}")
+
+    #change_total = sum(pnl_change)
 
     change_total = 0
     for i in range(len(pnl_change)):
@@ -38,13 +40,25 @@ with open(csvpath) as csvfile:
     min_month_index = pnl_change.index(min(pnl_change))
     min_month = monthcount[min_month_index]
 
-    #pnl_average = change_total
+    pnl_average = round(change_total / len(pnl_change))
 
     print("Financial Analysis")
     print("---------------------")
     print(f"Total Months: {total_months}")
     print(f"Total Profits/Losses: ${pnl_total}")
-    # print(f"Average Change: ${pnl_average}")
+    print(f"Average Change: ${pnl_average}")
     print(f"Greatest Increase in Profits: {max_month} (${greatest_increase})")
     print(f"Greatest Decrease in Profits: {min_month} (${greatest_decrease})")
 
+output_path = os.path.join("Analysis","analysis.txt")
+
+analysis = open(output_path, "w")
+    
+analysis.write("Financial Analysis\n")
+analysis.write("---------------------\n")
+analysis.write(f"Total Months: {total_months}\n")
+analysis.write(f"Total Profits/Losses: ${pnl_total}\n")
+analysis.write(f"Average Change: ${pnl_average}\n")
+analysis.write(f"Greatest Increase in Profits: {max_month} (${greatest_increase})\n")
+analysis.write(f"Greatest Decrease in Profits: {min_month} (${greatest_decrease})\n")
+analysis.close()
